@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 /**
  * Unit test for simple App.
  */
@@ -20,6 +19,7 @@ public class AppTest
 
     @Test
     public void testHealth(){
+
         int expected=200;
         try {
             assertEquals(expected, Json.getHealth());

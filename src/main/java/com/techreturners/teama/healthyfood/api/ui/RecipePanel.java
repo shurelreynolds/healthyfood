@@ -53,11 +53,11 @@ public class RecipePanel extends JPanel implements ActionListener {
     public void update(Meal meal) {
         this.meal = meal;
         titleLabel.setText(meal.getName());
-     /*  try {
-            picLabel.setIcon(new ImageIcon(new URL(meal.getPhoto())));
-        } catch (MalformedURLException e) {
+      try {
+            picLabel.setIcon(new ImageIcon(Json.decodeImage(meal.getPhoto())));
+        } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         prepLabel.setText("Prep Time: " + meal.getPrepTime());
         servLabel.setText("Serve: " + meal.getServings());
         ingLabel.setText(meal.getIngredients());
