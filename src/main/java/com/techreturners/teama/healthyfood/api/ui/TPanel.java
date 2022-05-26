@@ -8,10 +8,22 @@ public class TPanel extends JPanel {
     private int green = 240;
     private int blue = 240;
 
+    boolean reverse;
+
+    public TPanel(Color bgColor, LayoutManager layout, boolean reverse) {
+        this(bgColor, layout);
+        this.reverse = reverse;
+    }
+
+
     public TPanel(Color bgColor, LayoutManager layout) {
 
         this(bgColor);
         setLayout(layout);
+    }
+
+    public TPanel(Color bgColor, boolean reverse) {
+        this(bgColor);
     }
 
     public TPanel(Color bgColor) {
@@ -29,11 +41,10 @@ public class TPanel extends JPanel {
         float endPointX = width;
         float endPointY = 0.0f;
         Color startColor = new Color(red, green, blue, 255);
-        //Color endColor = new Color(red, green, blue, 0);
         Color endColor = Color.green;
 
-        Paint paint = new GradientPaint(startPointX, startPointY, startColor,
-                endPointX, endPointY, endColor);
+        Paint paint = new GradientPaint(startPointX, startPointY, reverse ? endColor : startColor,
+                endPointX, endPointY, reverse ? startColor : endColor);
 
         Graphics2D g2D = (Graphics2D) g;
         g2D.setPaint(paint);

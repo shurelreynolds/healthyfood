@@ -11,7 +11,7 @@ public class Meal {
     private String name;
     private String photo;
     private String servings;
-    private String prepTime;
+    private String preptime;
     private String ingredients;
     private String diet;
 
@@ -57,12 +57,12 @@ public class Meal {
         this.servings = servings;
     }
 
-    public String getPrepTime() {
-        return prepTime;
+    public String getPreptime() {
+        return preptime;
     }
 
-    public void setPrepTime(String prepTime) {
-        this.prepTime = prepTime;
+    public void setPreptime(String prepTime) {
+        this.preptime = prepTime;
     }
 
     public String getIngredients() {

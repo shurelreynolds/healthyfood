@@ -7,24 +7,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techreturners.teama.healthyfood.api.model.Diet;
 import com.techreturners.teama.healthyfood.api.model.Meal;
-import com.techreturners.teama.healthyfood.api.model.User;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Base64;
 import java.util.List;
 
 public class Json {
-    public static User defaultUser = new User("1", "Shurel Reynolds", "shurel_reynolds@yahoo.com", 2500, 1600, 600, 900);
 
 
     private static ObjectMapper objectMapper = getDefaultObjectMapper();
@@ -33,20 +24,6 @@ public class Json {
     private static HttpRequest request;
     private static HttpResponse<String> response;
 
-    public static String encodeImage(String url) throws IOException {
-
-            BufferedImage sourceImage= ImageIO.read(new URL(url));
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            ImageIO.write(sourceImage,"png",bytes);
-            String str= Base64.getEncoder().encodeToString(bytes.toByteArray());
-       return str;
-    }
-
-    public static BufferedImage decodeImage(String base64) throws IOException {
-        byte[] decodeBytes=Base64.getDecoder().decode(base64);
-        InputStream is=new ByteArrayInputStream(decodeBytes);
-        return ImageIO.read(is);
-    }
 
 
     public static int getHealth() throws IOException, InterruptedException {
@@ -90,6 +67,14 @@ public class Json {
         return objectMapper.readTree(str);
     }
 
+    public static <A> A fromJson(JsonNode node, Class<A> aClass) throws JsonProcessingException {
+        return objectMapper.treeToValue(node, aClass);
+    }
+
+    public static JsonNode toJson(Object object) {
+        return objectMapper.valueToTree(object);
+    }
+
     public static void saveMealToPlan(Meal meal) {
 
     }
@@ -102,13 +87,13 @@ public class Json {
                 .build();
 
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        String body = response.body();
+     /*   String body = response.body();
         if (body != null && body.indexOf(':') > -1)
             body = body.substring(body.indexOf(':') + 1);
         else body = defaultDiets();
 
-        //body=body.substring(body.indexOf(':')+1);
-        List<Diet> list = objectMapper.readValue(body, new TypeReference<List<Diet>>() {
+      */
+        List<Diet> list = objectMapper.readValue(defaultDiets(), new TypeReference<List<Diet>>() {
         });
         return list;
     }
