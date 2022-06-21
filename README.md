@@ -1,6 +1,7 @@
 # Healthy Food UI
 ### DB Schema
 ![DB Schema](https://github.com/shurelreynolds/healthyfood/blob/master/db_schema_v2.png)
+
 Used for the AWS MySQL DB
 
 ### UI
